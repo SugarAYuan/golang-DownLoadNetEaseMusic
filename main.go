@@ -3,14 +3,13 @@ package main
 import (
 	"github.com/hpcloud/tail"
 	"fmt"
-	//"strings"
-	//"reflect"
 	"strings"
 	"encoding/json"
 	"net/http"
 	"io"
 	"os"
 	"flag"
+	"path/filepath"
 )
 
 var logPath , downLoadDirPath string
@@ -26,7 +25,7 @@ func main() {
 		fmt.Println("输入文件将要下载到的目录，参数为 '-d'\r")
 		return
 	}
-	logPath = logPath + "/music.163.log"
+	logPath = filepath.Join(logPath + "music.163.log")
 	downLoadDirPath = downLoadDirPath + "/"
 
 	file , err := tail.TailFile(logPath , tail.Config{
@@ -69,16 +68,16 @@ func main() {
    下载文件
  */
 func downLoad (fileName , fileUrl string) {
-	fileName = downLoadDirPath + fileName
-
+	fileName = filepath.Join(downLoadDirPath , fileName)
 	fileRes , err := http.Get(fileUrl)
 
 	if err != nil {
 		fmt.Println(err)
-		return;
+		return
 	}
 
 	file , err := os.Create(fileName + ".mp3")
+	defer file.Close()
 
 	if err != nil {
 		fmt.Println(err)
