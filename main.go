@@ -13,10 +13,8 @@ import (
 	"flag"
 )
 
-	var logPath , downLoadDirPath string
+var logPath , downLoadDirPath string
 func main() {
-	//logPath = "/Users/aaroncao/Library/Containers/com.netease.163music/Data/Documents/storage/Logs/music.163.log";
-	//downLoadDirPath = "/Users/aaroncao/Downloads/"
 	flag.StringVar(&logPath ,"p" , "" ,"输出网易音乐的日志路径...")
 	flag.StringVar(&downLoadDirPath ,"d" , "" ,"输入文件将要下载到哪..")
 	flag.Parse()
