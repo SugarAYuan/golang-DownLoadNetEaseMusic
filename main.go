@@ -56,7 +56,7 @@ func main() {
 			var songName , musicUrl string
 			songName = s["songName"].(string)
 			musicUrl = s["musicurl"].(string)
-			downLoad(songName , musicUrl)
+			go downLoad(songName , musicUrl)
 			fmt.Println(songName , musicUrl)
 		}
 
